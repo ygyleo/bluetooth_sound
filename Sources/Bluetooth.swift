@@ -57,13 +57,10 @@ enum BluetoothDevices {
     static let queue = DispatchQueue(label: "local.bluetooth_sound.devices", qos: .userInitiated)
     private static let profilerQueue = DispatchQueue(label: "local.bluetooth_sound.profiler", qos: .utility)
 
-    static func paired() -> [BluetoothDevice] {
+    static func connectedAddresses() -> Set<String> {
         let devices = IOBluetoothDevice.pairedDevices() as? [IOBluetoothDevice] ?? []
-        return devices.compactMap { device in
-            guard let raw = device.addressString, let address = BluetoothDevice.normalizeAddress(raw) else { return nil }
-            return BluetoothDevice(address: address, name: device.name ?? raw,
-                                   kind: .classic(device), connected: device.isConnected())
-        }
+        return Set(devices.filter { $0.isConnected() }
+            .compactMap { $0.addressString.flatMap(BluetoothDevice.normalizeAddress) })
     }
 
     static func changeConnection(_ target: BluetoothDevice, connect: Bool) throws {

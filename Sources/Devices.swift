@@ -1,6 +1,5 @@
 import CoreAudio
 import Foundation
-import IOBluetooth
 
 enum DeviceKind: Equatable, Sendable {
     case airPods, airPods3, airPods4, airPodsPro, airPodsMax
@@ -47,37 +46,6 @@ enum DeviceKind: Equatable, Sendable {
         if label.contains("macbook") { return .computer }
         return .other
     }
-
-    static func classic(_ device: IOBluetoothDevice) -> Self {
-        let byName = named(device.name ?? "")
-        if byName != .other { return byName }
-        switch Int(device.deviceClassMajor) {
-        case kBluetoothDeviceClassMajorAudio:
-            switch Int(device.deviceClassMinor) {
-            case kBluetoothDeviceClassMinorAudioHeadphones, kBluetoothDeviceClassMinorAudioHeadset,
-                 kBluetoothDeviceClassMinorAudioHandsFree:
-                return .headphones
-            case kBluetoothDeviceClassMinorAudioLoudspeaker, kBluetoothDeviceClassMinorAudioCar,
-                 kBluetoothDeviceClassMinorAudioHiFi:
-                return .externalSpeaker
-            default:
-                return .other
-            }
-        case kBluetoothDeviceClassMajorPeripheral:
-            let minor = Int(device.deviceClassMinor)
-            switch minor & 0x30 {
-            case kBluetoothDeviceClassMinorPeripheral1Keyboard, kBluetoothDeviceClassMinorPeripheral1Combo:
-                return .keyboard
-            case kBluetoothDeviceClassMinorPeripheral1Pointing:
-                return .mouse
-            default:
-                return minor == kBluetoothDeviceClassMinorPeripheral2Gamepad ? .controller : .other
-            }
-        case kBluetoothDeviceClassMajorPhone: return .phone
-        case kBluetoothDeviceClassMajorComputer: return .computer
-        default: return .other
-        }
-    }
 }
 
 struct DeviceBattery: Sendable {
@@ -98,6 +66,7 @@ struct BluetoothDevice: Sendable {
     let kind: DeviceKind
     let connected: Bool
     var battery = DeviceBattery()
+    var isPlaceholder = false
 
     static func normalizeAddress(_ string: String) -> String? {
         let address = string.replacingOccurrences(of: ":", with: "").replacingOccurrences(of: "-", with: "")
@@ -107,23 +76,33 @@ struct BluetoothDevice: Sendable {
         return address.lowercased()
     }
 
-    static func fromProfiler(_ data: Data) -> [Self] {
+    static func fromProfiler(_ data: Data) -> [Self]? {
         guard let root = (try? JSONSerialization.jsonObject(with: data)) as? [String: Any],
-              let controllers = root["SPBluetoothDataType"] as? [[String: Any]] else { return [] }
+              let controllers = root["SPBluetoothDataType"] as? [[String: Any]],
+              controllers.contains(where: { !$0.isEmpty }) else { return nil }
         var devices: [String: Self] = [:]
         for controller in controllers {
             for (key, connected) in [("device_not_connected", false), ("device_connected", true)] {
                 for entry in controller[key] as? [[String: [String: Any]]] ?? [] {
                     for (name, info) in entry {
                         guard let raw = info["device_address"] as? String,
-                              let address = normalizeAddress(raw) else { continue }
+                              let address = normalizeAddress(raw),
+                              !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
+                              UUID(uuidString: name) == nil,
+                              normalizeAddress(name) != address else { continue }
                         if devices[address]?.connected == true && !connected { continue }
                         let kind = DeviceKind.named(name, type: info["device_minorType"] as? String ?? "",
                                                     product: info["device_productID"] as? String ?? "")
+                        let discoveryOnly = info.keys.allSatisfy { $0 == "device_address" || $0 == "device_rssi" }
+                        // A phone or tablet with only discovery metadata is not a selectable accessory.
+                        if !connected && discoveryOnly && (kind == .phone || kind == .tablet) { continue }
+                        let isPlaceholder = !connected && discoveryOnly
+                            && ["Bluetooth Device", "蓝牙设备", "藍牙裝置"].contains(name)
                         let battery = DeviceBattery(left: DeviceBattery.percent(info["device_batteryLevelLeft"]),
                                                     right: DeviceBattery.percent(info["device_batteryLevelRight"]),
                                                     main: DeviceBattery.percent(info["device_batteryLevelMain"]))
-                        devices[address] = Self(address: address, name: name, kind: kind, connected: connected, battery: battery)
+                        devices[address] = Self(address: address, name: name, kind: kind, connected: connected,
+                                                battery: battery, isPlaceholder: isPlaceholder)
                     }
                 }
             }

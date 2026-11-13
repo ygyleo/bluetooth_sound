@@ -13,9 +13,9 @@ final class StatusMenu: NSObject, NSApplicationDelegate, CBCentralManagerDelegat
     private var outputListener: AudioObjectPropertyListenerBlock?
     private var power: BluetoothPower = .unavailable
     private var output: AudioOutput?
-    private var paired: [BluetoothDevice]?
-    private var profiled: [BluetoothDevice] = []
-    private var refreshingDevices = false
+    private var connectedAddresses: Set<String> = []
+    private var checkingConnections = false
+    private var profiled: [BluetoothDevice]?
     private var profiling = false
     private var lastProfile = Date.distantPast
     private var changing = false
@@ -76,17 +76,7 @@ final class StatusMenu: NSObject, NSApplicationDelegate, CBCentralManagerDelegat
     }
 
     private var devices: [BluetoothDevice] {
-        var index = Dictionary(profiled.map { ($0.address, $0) }, uniquingKeysWith: { first, _ in first })
-        for device in paired ?? [] {
-            guard let metadata = index[device.address] else {
-                index[device.address] = device
-                continue
-            }
-            index[device.address] = BluetoothDevice(address: device.address, name: device.name,
-                                                    kind: metadata.kind == .other ? device.kind : metadata.kind,
-                                                    connected: device.connected, battery: metadata.battery)
-        }
-        return index.values.sorted {
+        (profiled ?? []).sorted {
             if $0.connected != $1.connected { return $0.connected }
             let order = $0.name.localizedStandardCompare($1.name)
             return order == .orderedSame ? $0.address < $1.address : order == .orderedAscending
@@ -98,37 +88,33 @@ final class StatusMenu: NSObject, NSApplicationDelegate, CBCentralManagerDelegat
         power = central?.state == .unsupported ? .unavailable : Adapter.power()
         output = Audio.currentOutput()
         if power != previousPower && power != .on {
-            paired = nil
-            profiled = []
+            connectedAddresses = []
+            profiled = nil
             lastProfile = .distantPast
         }
         if power == .on && CBCentralManager.authorization == .allowedAlways {
-            refreshDevices()
+            checkConnections()
+            refreshProfile()
         }
         updateIcon()
     }
 
-    private func refreshDevices(profileNow: Bool = false) {
-        if !refreshingDevices {
-            refreshingDevices = true
-            BluetoothDevices.queue.async { [weak self] in
-                let current = BluetoothDevices.paired()
-                DispatchQueue.main.async {
-                    guard let self else { return }
-                    self.refreshingDevices = false
-                    guard self.power == .on else { return }
-                    let formerlyConnected = Set((self.paired ?? []).filter(\.connected).map(\.address))
-                    let nowConnected = Set(current.filter(\.connected).map(\.address))
-                    self.paired = current
-                    self.updateIcon()
-                    if formerlyConnected != nowConnected { self.refreshProfile(force: true) }
-                }
+    private func checkConnections() {
+        guard !checkingConnections else { return }
+        checkingConnections = true
+        BluetoothDevices.queue.async { [weak self] in
+            let current = BluetoothDevices.connectedAddresses()
+            DispatchQueue.main.async {
+                guard let self else { return }
+                self.checkingConnections = false
+                guard self.power == .on, current != self.connectedAddresses else { return }
+                self.connectedAddresses = current
+                self.refreshProfile(force: true)
             }
         }
-        refreshProfile(force: profileNow)
     }
 
-    private func refreshProfile(force: Bool) {
+    private func refreshProfile(force: Bool = false) {
         guard !profiling, force || Date().timeIntervalSince(lastProfile) >= 30 else { return }
         profiling = true
         lastProfile = Date()
@@ -154,7 +140,8 @@ final class StatusMenu: NSObject, NSApplicationDelegate, CBCentralManagerDelegat
         let status: String
         switch power {
         case .on:
-            status = output.flatMap { $0.name.isEmpty ? nil : $0.name } ?? L10n.text("bluetooth.on")
+            status = output?.bluetoothDevice(in: devices)?.name
+                ?? output.flatMap { $0.name.isEmpty ? nil : $0.name } ?? L10n.text("bluetooth.on")
         case .off: status = L10n.text("bluetooth.off")
         case .unavailable: status = L10n.text("bluetooth.unavailable")
         }
@@ -177,6 +164,9 @@ final class StatusMenu: NSObject, NSApplicationDelegate, CBCentralManagerDelegat
 
     private func showMenu(from button: NSStatusBarButton) {
         refreshStatus()
+        if power == .on && CBCentralManager.authorization == .allowedAlways {
+            refreshProfile(force: true)
+        }
         let menu = makeMenu()
         // Keeping a menu attached between clicks takes over the primary click on macOS 27.
         presentingMenu = true
@@ -203,7 +193,7 @@ final class StatusMenu: NSObject, NSApplicationDelegate, CBCentralManagerDelegat
             case .on:
                 let currentDevices = devices
                 if currentDevices.isEmpty {
-                    menu.addItem(menuItem(paired == nil || profiling ? "bluetooth.loading" : "bluetooth.empty"))
+                    menu.addItem(menuItem(profiled == nil && profiling ? "bluetooth.loading" : "bluetooth.empty"))
                 }
                 let outputID = output?.bluetoothDevice(in: currentDevices)?.address
                 for device in currentDevices {
@@ -214,6 +204,7 @@ final class StatusMenu: NSObject, NSApplicationDelegate, CBCentralManagerDelegat
                     entry.target = self
                     entry.representedObject = device.address
                     entry.image = Glyphs.device(device.kind, size: 16)
+                    entry.isEnabled = !device.isPlaceholder
                     let isConnected = isOutput || device.connected
                     entry.state = isConnected ? .on : .off
                     if #available(macOS 27.0, *) { entry.preferredImageVisibility = .visible }
@@ -354,9 +345,8 @@ final class StatusMenu: NSObject, NSApplicationDelegate, CBCentralManagerDelegat
                 showError(error, device: target.name)
             }
             changing = false
-            profiled.removeAll { $0.address == target.address }
             refreshStatus()
-            refreshDevices(profileNow: true)
+            refreshProfile(force: true)
         }
     }
 
