@@ -252,6 +252,7 @@ final class StatusMenu: NSObject, NSApplicationDelegate, CBCentralManagerDelegat
             }
         }
 
+        menu.addItem(.separator())
         menu.addItem(menuItem("action.bluetoothSettings", action: #selector(openBluetoothSettings)))
         return menu
     }
