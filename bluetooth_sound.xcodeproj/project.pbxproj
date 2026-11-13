@@ -1,0 +1,359 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0A031F7F6EA531A883C4ED34 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 517700CBB38B5B67DEF70E34 /* InfoPlist.strings */; };
+		156321C0DFB499686638CA34 /* Glyphs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B214193558B87C797CF3F8 /* Glyphs.swift */; };
+		1D3224A6D957368A06AEC0B9 /* StatusMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541F3ABDEB1ACE90E735AC27 /* StatusMenu.swift */; };
+		5CA54671E076DFEEB47779B9 /* BluetoothSound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ACD5A4D34AD5D4D831BDE9D /* BluetoothSound.swift */; };
+		6765EC76692E1222ED68153B /* Bluetooth.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA6C6142980AAEA83D797F1 /* Bluetooth.swift */; };
+		778127D4C1A79B30B5A73DE2 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1D7ED9EE37FEEC71E6B74A /* Audio.swift */; };
+		A10B1DBBC45B0F10945F924B /* Devices.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D889FE2E30836B3E35E009 /* Devices.swift */; };
+		D0EFA82E521D01A86AF62866 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532EEE34C52F740C584AA640 /* Settings.swift */; };
+		DD61C7DD4F829B1C99FDD616 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D17C83CDC04E2BEA2CEF068F /* Localizable.strings */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1ACD5A4D34AD5D4D831BDE9D /* BluetoothSound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothSound.swift; sourceTree = "<group>"; };
+		1B97389E22E9DA2039367604 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		23DB8B76E6FC657D23FF1389 /* bluetooth_sound.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bluetooth_sound.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B1D7ED9EE37FEEC71E6B74A /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
+		52B214193558B87C797CF3F8 /* Glyphs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Glyphs.swift; sourceTree = "<group>"; };
+		532EEE34C52F740C584AA640 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		53FF63417C801B997935735E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		541F3ABDEB1ACE90E735AC27 /* StatusMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusMenu.swift; sourceTree = "<group>"; };
+		B2A01A1FA9FBD1B8F304B220 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		B7D889FE2E30836B3E35E009 /* Devices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Devices.swift; sourceTree = "<group>"; };
+		DB2E1B6D15303D774DF9A1EF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		FDA6C6142980AAEA83D797F1 /* Bluetooth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bluetooth.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		8F3075075806C2A9401035CD /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				3B1D7ED9EE37FEEC71E6B74A /* Audio.swift */,
+				FDA6C6142980AAEA83D797F1 /* Bluetooth.swift */,
+				1ACD5A4D34AD5D4D831BDE9D /* BluetoothSound.swift */,
+				B7D889FE2E30836B3E35E009 /* Devices.swift */,
+				52B214193558B87C797CF3F8 /* Glyphs.swift */,
+				532EEE34C52F740C584AA640 /* Settings.swift */,
+				541F3ABDEB1ACE90E735AC27 /* StatusMenu.swift */,
+				517700CBB38B5B67DEF70E34 /* InfoPlist.strings */,
+				D17C83CDC04E2BEA2CEF068F /* Localizable.strings */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		D734D3421D5B4937121FBBFE = {
+			isa = PBXGroup;
+			children = (
+				8F3075075806C2A9401035CD /* Sources */,
+				E9C66A5E8B2227CF8B18184C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E9C66A5E8B2227CF8B18184C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				23DB8B76E6FC657D23FF1389 /* bluetooth_sound.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8C402D3525FBE5FCB1F3566F /* bluetooth_sound */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 40582E91DAD2781EF392675D /* Build configuration list for PBXNativeTarget "bluetooth_sound" */;
+			buildPhases = (
+				1D4CA03FC8A4A09715774D27 /* Sources */,
+				735A748BE5EBFAE7D7DE1165 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = bluetooth_sound;
+			packageProductDependencies = (
+			);
+			productName = bluetooth_sound;
+			productReference = 23DB8B76E6FC657D23FF1389 /* bluetooth_sound.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1720D2E7AEB56CDD37A07FB7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+				};
+			};
+			buildConfigurationList = 495A0D5AE450B67FFE50448B /* Build configuration list for PBXProject "bluetooth_sound" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+				"zh-Hans",
+			);
+			mainGroup = D734D3421D5B4937121FBBFE;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = E9C66A5E8B2227CF8B18184C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8C402D3525FBE5FCB1F3566F /* bluetooth_sound */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		735A748BE5EBFAE7D7DE1165 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A031F7F6EA531A883C4ED34 /* InfoPlist.strings in Resources */,
+				DD61C7DD4F829B1C99FDD616 /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1D4CA03FC8A4A09715774D27 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				778127D4C1A79B30B5A73DE2 /* Audio.swift in Sources */,
+				6765EC76692E1222ED68153B /* Bluetooth.swift in Sources */,
+				5CA54671E076DFEEB47779B9 /* BluetoothSound.swift in Sources */,
+				A10B1DBBC45B0F10945F924B /* Devices.swift in Sources */,
+				156321C0DFB499686638CA34 /* Glyphs.swift in Sources */,
+				D0EFA82E521D01A86AF62866 /* Settings.swift in Sources */,
+				1D3224A6D957368A06AEC0B9 /* StatusMenu.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		517700CBB38B5B67DEF70E34 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DB2E1B6D15303D774DF9A1EF /* en */,
+				53FF63417C801B997935735E /* zh-Hans */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		D17C83CDC04E2BEA2CEF068F /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1B97389E22E9DA2039367604 /* en */,
+				B2A01A1FA9FBD1B8F304B220 /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		36A09DBAF6460E276C5F03D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 2;
+				ENABLE_APP_SANDBOX = NO;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSUIElement = YES;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "bluetooth_sound needs Bluetooth access to show and connect paired devices and control Bluetooth.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "local.bluetooth-sound.app";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		43E1064CCD5ED00B9DA45880 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		4EBD013C14D847C50DB3E295 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		7E310B0D98E3DD7D2E0963E7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 2;
+				ENABLE_APP_SANDBOX = NO;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSUIElement = YES;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "bluetooth_sound needs Bluetooth access to show and connect paired devices and control Bluetooth.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "local.bluetooth-sound.app";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		40582E91DAD2781EF392675D /* Build configuration list for PBXNativeTarget "bluetooth_sound" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7E310B0D98E3DD7D2E0963E7 /* Debug */,
+				36A09DBAF6460E276C5F03D2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		495A0D5AE450B67FFE50448B /* Build configuration list for PBXProject "bluetooth_sound" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				43E1064CCD5ED00B9DA45880 /* Debug */,
+				4EBD013C14D847C50DB3E295 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1720D2E7AEB56CDD37A07FB7 /* Project object */;
+}
